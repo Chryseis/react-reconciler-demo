@@ -9,20 +9,20 @@ const Child = ({ onClick }) => (
   </div>
 );
 
-class App extends React.Component {
-  componentDidMount() {}
+const App = () => {
+  const [visible, setVisible] = React.useState(false);
 
-  click = e => {
+  const click = e => {
     console.log(e, this);
   };
 
-  render() {
-    return (
-      <div className='App'>
-        <Child onClick={this.click} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='App'>
+      <Child onClick={click} />
+      <button onClick={() => setVisible(visible => !visible)}>点我</button>
+      {visible && <div>Hello</div>}
+    </div>
+  );
+};
 
 export default App;

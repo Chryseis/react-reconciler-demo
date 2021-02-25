@@ -7,9 +7,13 @@ let reconciler = ReactReconciler({
     return Date.now();
   },
 
-  getPublicInstance() {},
+  getPublicInstance(instance) {
+    console.log('getPublicInstance');
+  },
 
-  getRootHostContext() {},
+  getRootHostContext(rootContainer) {
+    return {};
+  },
 
   getChildHostContext(parentHostContext, type, rootContainerInstance) {
     return parentHostContext;
@@ -20,11 +24,21 @@ let reconciler = ReactReconciler({
   },
 
   createInstance(type, props, rootContainer, hostContext, internalHandle) {
-    console.log(type, props, rootContainer);
+    console.log('createInstance', props);
+    let element = document.createElement(type);
+    Object.entries(props).forEach(([key, value]) => {
+      if (key.startsWith('on')) {
+        element.addEventListener(key.toLowerCase().slice(2), value);
+      } else if (key === 'className') {
+        element.className = value;
+      }
+    });
+    return element;
   },
 
   createTextInstance(text, rootContainer, hostContext, internalHandle) {
-    console.log(text, rootContainer, hostContext, internalHandle);
+    console.log('createTextInstance');
+    return document.createTextNode(text);
   },
 
   prepareForCommit() {},
@@ -39,21 +53,43 @@ let reconciler = ReactReconciler({
 
   clearContainer(container) {},
 
-  appendInitialChild(parentInstance, child) {},
+  appendInitialChild(parentInstance, child) {
+    console.log('appendInitialChild');
+    parentInstance.appendChild(child);
+  },
 
-  appendChild(parentInstance, child) {},
+  appendChild(parentInstance, child) {
+    console.log('appendChild');
+    parentInstance.appendChild(child);
+  },
 
-  insertBefore(parentInstance, child, beforeChild) {},
+  insertBefore(parentInstance, child, beforeChild) {
+    console.log('insertBefore');
+    parentInstance.insertBefore(child, beforeChild);
+  },
 
-  removeChild(parentInstance, child) {},
+  removeChild(parentInstance, child) {
+    console.log('removeChild', child, parentInstance);
+    parentInstance.removeChild(child);
+  },
 
-  finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {},
+  finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {
+    return false;
+  },
 
-  appendChildToContainer(container, child) {},
+  appendChildToContainer(container, child) {
+    console.log('appendChildToContainer');
+    container.appendChild(child);
+  },
 
-  insertInContainerBefore() {},
+  insertInContainerBefore(container, child, beforeChild) {
+    console.log('insertInContainerBefore');
+    container.insertBefore(child, beforeChild);
+  },
 
-  removeChildFromContainer() {},
+  removeChildFromContainer(container, child) {
+    container.removeChild(child);
+  },
 
   hideInstance() {},
 
