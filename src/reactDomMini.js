@@ -37,7 +37,7 @@ let reconciler = ReactReconciler({
 
   commitUpdate() {},
 
-  appendInitialChild() {},
+  appendInitialChild(parentInstance, child) {},
 
   appendChild() {},
 
@@ -47,7 +47,7 @@ let reconciler = ReactReconciler({
 
   removeChild() {},
 
-  finalizeInitialChildren() {},
+  finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {},
 
   appendChildToContainer() {},
 
