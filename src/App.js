@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Son = ({ onClick }) => <div onClick={onClick}>Son</div>;
+
+const Child = ({ onClick }) => (
+  <div>
+    <Son onClick={onClick} />
+  </div>
+);
+
+class App extends React.Component {
+  componentDidMount() {}
+
+  click = e => {
+    console.log(e, this);
+  };
+
+  render() {
+    return (
+      <div className='App'>
+        <Child onClick={this.click} />
+      </div>
+    );
+  }
 }
 
 export default App;
