@@ -20,7 +20,7 @@ let reconciler = ReactReconciler({
   },
 
   createInstance(type, props, rootContainer, hostContext, internalHandle) {
-    console.log(type, props, rootContainer, 'instance');
+    console.log(type, props, rootContainer);
   },
 
   createTextInstance(text, rootContainer, hostContext, internalHandle) {
@@ -37,19 +37,19 @@ let reconciler = ReactReconciler({
 
   commitUpdate() {},
 
+  clearContainer(container) {},
+
   appendInitialChild(parentInstance, child) {},
 
-  appendChild() {},
+  appendChild(parentInstance, child) {},
 
-  clearContainer() {},
+  insertBefore(parentInstance, child, beforeChild) {},
 
-  insertBefore() {},
-
-  removeChild() {},
+  removeChild(parentInstance, child) {},
 
   finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {},
 
-  appendChildToContainer() {},
+  appendChildToContainer(container, child) {},
 
   insertInContainerBefore() {},
 
