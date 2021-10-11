@@ -27,12 +27,15 @@ const App = () => {
     <div className='App'>
       <Box onClick={click} />
       <button onClick={() => setVisible(visible => !visible)}>who am I?</button>
-      <Router history={hashHistory}>
-        <Switch>
-          <Route path='/' exact component={About} />
-          <Route path='/summary' exact component={Summary} />
-        </Switch>
-      </Router>
+      <Router
+        history={hashHistory}
+        children={
+          <Switch>
+            <Route path='/' exact component={About} />
+            <Route path='/summary' exact component={Summary} />
+          </Switch>
+        }
+      />
     </div>
   );
 };
