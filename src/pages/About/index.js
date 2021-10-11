@@ -5,8 +5,8 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import './index.css';
 
-function About() {
-  const history = useHistory();
+function About({ history }) {
+  console.log(history);
 
   return (
     <div className='about' onClick={() => history.push('/summary')}>
