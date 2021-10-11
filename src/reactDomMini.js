@@ -29,8 +29,6 @@ let reconciler = ReactReconciler({
     Object.entries(props).forEach(([key, value]) => {
       if (key.startsWith('on')) {
         element.addEventListener(key.toLowerCase().slice(2), value);
-      } else if (key === 'className') {
-        element.className = value;
       }
     });
     return element;
@@ -49,7 +47,7 @@ let reconciler = ReactReconciler({
 
   prepareUpdate() {},
 
-  commitUpdate() {},
+  commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {},
 
   clearContainer(container) {},
 
@@ -65,7 +63,6 @@ let reconciler = ReactReconciler({
 
   insertBefore(parentInstance, child, beforeChild) {
     console.log('insertBefore');
-    parentInstance.insertBefore(child, beforeChild);
   },
 
   removeChild(parentInstance, child) {
@@ -84,7 +81,6 @@ let reconciler = ReactReconciler({
 
   insertInContainerBefore(container, child, beforeChild) {
     console.log('insertInContainerBefore');
-    container.insertBefore(child, beforeChild);
   },
 
   removeChildFromContainer(container, child) {

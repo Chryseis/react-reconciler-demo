@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
 
-const Son = ({ onClick }) => <div onClick={onClick}>Son</div>;
+const Apple = ({ onClick }) => <div onClick={onClick}>apple is red</div>;
 
-const Child = ({ onClick }) => (
-  <div>
-    <Son onClick={onClick} />
+const Box = ({ onClick }) => (
+  <div className='apple'>
+    <Apple onClick={onClick} />
   </div>
 );
 
@@ -13,14 +13,14 @@ const App = () => {
   const [visible, setVisible] = React.useState(false);
 
   const click = e => {
-    console.log(e, this);
+    console.log(e);
   };
 
   return (
     <div className='App'>
-      <Child onClick={click} />
-      <button onClick={() => setVisible(visible => !visible)}>点我</button>
-      {visible && <div>Hello</div>}
+      <Box onClick={click} />
+      <button onClick={() => setVisible(visible => !visible)}>who am I?</button>
+      {visible && <div>Hello,I'm Allen</div>}
     </div>
   );
 };

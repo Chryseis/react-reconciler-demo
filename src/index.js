@@ -1,11 +1,11 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
-import ReactDomMini from './reactDomMini';
+import ReactDOM from 'react-dom';
+//import ReactDomMini from './reactDomMini';
 import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 
-ReactDomMini.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
