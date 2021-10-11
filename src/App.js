@@ -1,5 +1,11 @@
 import './App.css';
 import React from 'react';
+import { Switch, Router, Route } from 'react-router';
+import { createHashHistory } from 'history';
+import About from './pages/About';
+import Summary from './pages/Summary';
+
+const hashHistory = createHashHistory();
 
 const Apple = ({ onClick }) => <div onClick={onClick}>apple is red</div>;
 
@@ -20,7 +26,12 @@ const App = () => {
     <div className='App'>
       <Box onClick={click} />
       <button onClick={() => setVisible(visible => !visible)}>who am I?</button>
-      {visible && <div>Hello,I'm Allen</div>}
+      <Router history={hashHistory}>
+        <Switch>
+          <Route path='/' exact component={About} />
+          <Route path='/summary' exact component={Summary} />
+        </Switch>
+      </Router>
     </div>
   );
 };
