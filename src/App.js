@@ -24,7 +24,7 @@ const App = () => {
   };
   useEffect(() => {
     console.log('app');
-    // window.wv.customContentfulPaint();
+    window.wv.customContentfulPaint();
   }, []);
 
   return (
