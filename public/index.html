@@ -28,6 +28,36 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script src="http://localhost:2021/wpDist/web-performance.min.js"></script>
+    <script>
+      window.wv = new MITO.WebVitals({
+        appId: 'allen-test',
+        version: '1.0.0',
+        reportCallback: (metrics) => {
+          if(window.wv){
+            const infos = window.wv.getCurrentMetrics()
+
+            const pageInfo = infos['page-information']
+            const networkInfo = infos['network-information']
+            const deviceInfo = infos['device-information']
+
+            function mergeData(data) {
+              const { data: { name, ...metrics }, ...rest } = data
+              if (name !== 'resource-flow' && name.indexOf('info') < 0) {
+                return { name, ...metrics, ...rest, ...pageInfo.value, ...networkInfo.value, ...deviceInfo.value }
+              }
+              return data
+            }
+
+            // todo e.g clean data to report for analyzing
+            console.log(mergeData(metrics))
+          }
+        },
+        immediately: true,
+        needCCP: true,
+        logFpsCount:10
+      })
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

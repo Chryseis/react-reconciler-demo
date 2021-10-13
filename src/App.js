@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Router, Route } from 'react-router';
 //import { HashRouter, Switch, Route } from 'react-router-dom';
 import { createHashHistory } from 'history';
@@ -22,6 +22,10 @@ const App = () => {
   const click = e => {
     console.log(e);
   };
+  useEffect(() => {
+    console.log('app');
+    // window.wv.customContentfulPaint();
+  }, []);
 
   return (
     <div className='App'>
