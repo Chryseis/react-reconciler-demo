@@ -1,12 +1,25 @@
 import './App.css';
 import React, { useEffect } from 'react';
 import { Switch, Router, Route } from 'react-router';
-//import { HashRouter, Switch, Route } from 'react-router-dom';
 import { createHashHistory } from 'history';
-import About from './pages/About';
-import Summary from './pages/Summary';
+import lazyLoad from './hoc/lazyLoad';
 
-const hashHistory = createHashHistory();
+const createHistory = () => {
+  const hashHistory = createHashHistory();
+
+  const listen = hashHistory.listen;
+
+  hashHistory.listen = function(cb) {
+    if (cb && typeof cb === 'function') {
+      cb();
+      listen.call(this, cb);
+    }
+  };
+
+  return hashHistory;
+};
+
+const history = createHistory();
 
 const Apple = ({ onClick }) => <div onClick={onClick}>apple is red</div>;
 
@@ -27,16 +40,37 @@ const App = () => {
     window.wv.customContentfulPaint();
   }, []);
 
+  useEffect(() => {
+    history.listen(() => {
+      setTimeout(() => {
+        console.log('history change');
+      });
+    });
+  }, []);
+
   return (
     <div className='App'>
       <Box onClick={click} />
       <button onClick={() => setVisible(visible => !visible)}>who am I?</button>
       <Router
-        history={hashHistory}
+        history={history}
         children={
           <Switch>
-            <Route path='/' exact component={About} />
-            <Route path='/summary' exact component={Summary} />
+            <Route
+              path='/'
+              exact
+              component={lazyLoad(() => import(/* webpackChunkName:'p_about' */ './pages/About'))}
+            />
+            <Route
+              path='/summary'
+              exact
+              component={lazyLoad(() => import(/* webpackChunkName:'p_summary' */ './pages/Summary'))}
+            />
+            <Route
+              path='/todo'
+              exact
+              component={lazyLoad(() => import(/* webpackChunkName:'p_todo' */ './pages/Todo'))}
+            />
           </Switch>
         }
       />
