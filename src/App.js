@@ -9,7 +9,7 @@ const createHistory = () => {
 
   const listen = hashHistory.listen;
 
-  hashHistory.listen = function(cb) {
+  hashHistory.listen = function (cb) {
     if (cb && typeof cb === 'function') {
       cb();
       listen.call(this, cb);
@@ -21,14 +21,6 @@ const createHistory = () => {
 
 const history = createHistory();
 
-const Apple = ({ onClick }) => <div onClick={onClick}>apple is red</div>;
-
-const Box = ({ onClick }) => (
-  <div className='apple'>
-    <Apple onClick={onClick} />
-  </div>
-);
-
 const App = () => {
   const [visible, setVisible] = React.useState(false);
 
@@ -37,7 +29,6 @@ const App = () => {
   };
   useEffect(() => {
     console.log('app');
-    window.wv.customContentfulPaint();
   }, []);
 
   useEffect(() => {
@@ -50,8 +41,6 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Box onClick={click} />
-      <button onClick={() => setVisible(visible => !visible)}>who am I?</button>
       <Router
         history={history}
         children={
@@ -70,6 +59,11 @@ const App = () => {
               path='/todo'
               exact
               component={lazyLoad(() => import(/* webpackChunkName:'p_todo' */ './pages/Todo'))}
+            />
+            <Route
+              path='/author'
+              exact
+              component={lazyLoad(() => import(/* webpackChunkName:'p_author' */ './pages/Author'))}
             />
           </Switch>
         }

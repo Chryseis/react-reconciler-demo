@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import './index.css';
 import axios from 'axios';
+import withPerformance from '../../hoc/performance';
 
 const request = axios.create();
 
@@ -48,4 +49,4 @@ function About({ history }) {
   );
 }
 
-export default About;
+export default withPerformance(About);
